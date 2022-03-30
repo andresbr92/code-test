@@ -33,6 +33,7 @@ const ExpandMore = styled((props) => {
 const DeviceDetail = () => {
   const { id } = useParams();
   const history = useHistory();
+  const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(true);
   const [deviceDetail, setDeviceDetail] = useState();
   const handleExpandClick = () => {
@@ -40,17 +41,20 @@ const DeviceDetail = () => {
   };
   const handleDelete = async () => {
     await deleteDevice(id);
-    history.push('/list');
+    history.push('/');
   };
 
   useEffect(() => {
     async function fetchData (id) {
       const deviceDetail = await getDeviceDetail(id);
       setDeviceDetail(deviceDetail);
+      setTimeout(() => {
+        setLoading(false);
+      }, 800);
     }
     fetchData(id);
   }, [id]);
-  if (!deviceDetail) return <CircularIndeterminate />;
+  if (loading) return <CircularIndeterminate />;
 
   return (
     <Grid container style={{ display: 'flex', justifyContent: 'center', marginTop: '25px' }}>
@@ -63,7 +67,7 @@ const DeviceDetail = () => {
             </Avatar>
         }
           action={
-            <Button variant='outlined' onClick={() => history.push('/list')}>
+            <Button variant='outlined' onClick={() => history.push('/')}>
               Go Back
             </Button>
         }
