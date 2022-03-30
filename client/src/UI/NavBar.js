@@ -73,7 +73,7 @@ const ResponsiveAppBar = () => {
             >
 
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link className={classes.linkMobile} to='/list'>List</Link>
+                <Link className={classes.linkMobile} to='/'>List</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Link className={classes.linkMobile} to='/newdevice'> New Device </Link>
@@ -95,7 +95,7 @@ const ResponsiveAppBar = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <Link className={classes.link} to='/list'> List </Link>
+              <Link className={classes.link} to='/'> List </Link>
             </Button>
             <Button
               onClick={handleCloseNavMenu}

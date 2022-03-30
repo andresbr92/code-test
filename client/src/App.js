@@ -11,7 +11,7 @@ function App () {
     <>
       <ResponsiveAppBar />
       <Switch>
-        <Route path='/list'>
+        <Route exact path='/'>
           <Home />
         </Route>
         <Route path='/newdevice'>

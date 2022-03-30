@@ -6,7 +6,7 @@ import { createDevice, updateDevice, getDeviceDetail } from '../../API';
 const schema = {
   title: 'New Device',
   type: 'object',
-  // required: ['name', 'description', 'price', 'manufacturer', 'color', 'screen', 'ram'],
+  required: ['name', 'description', 'price', 'manufacturer', 'color', 'screen', 'ram'],
   properties: {
     name: { type: 'string', title: 'Title' },
     manufacturer: { type: 'string', title: 'Manufacturer' },
@@ -17,13 +17,11 @@ const schema = {
     screen: { type: 'string', title: 'Screen' },
     proccessor: { type: 'string', title: 'Proccessor' },
     ram: { type: 'number', title: 'Ram' }
-
   }
 };
 
 const NewDevice = () => {
   const history = useHistory();
-  console.log(history);
   const { id } = useParams();
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({});
@@ -43,9 +41,8 @@ const NewDevice = () => {
       await updateDevice(id, formData);
       history.push(`/device/detail/${id}`);
     } else {
-      console.log('creating');
       await createDevice(formData);
-      history.push('/list');
+      history.push('/');
     }
   };
   return (
@@ -54,7 +51,7 @@ const NewDevice = () => {
         <Form formData={formData || undefined} onSubmit={onSubmit} schema={schema}>
           <Grid style={{ display: 'flex', justifyContent: 'space-around', marginTop: '15px' }} item xs={12}>
             <Button type='submit' variant='outlined'>Submit</Button>
-            <Button onClick={() => history.push('/list')} variant='outlined'>Go Back</Button>
+            <Button onClick={() => history.push('/')} variant='outlined'>Go Back</Button>
           </Grid>
         </Form>
       </Grid>

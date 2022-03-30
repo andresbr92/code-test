@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [devices, setDevices] = useState([]);
   const classes = useStyles();
 
@@ -26,11 +27,14 @@ const Home = () => {
     async function fetchData () {
       const devices = await getDeviceList();
       setDevices(devices);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
     fetchData();
   }, []);
 
-  if (!devices.length) return <CircularIndeterminate />;
+  if (loading) return <CircularIndeterminate />;
 
   return (
     <Grid container className={classes.home} spacing={3}>
