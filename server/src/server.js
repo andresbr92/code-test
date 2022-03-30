@@ -22,10 +22,10 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-const port = 3031;
-const config = require('./config/config');
+const port = 5000;
+const config = require('../config/config');
 
-const router = require('./routes/index');
+const router = require('../routes/index');
 
 app.use(logger('dev'));
 
