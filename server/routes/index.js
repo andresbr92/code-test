@@ -33,9 +33,9 @@ router.get('/device/list', async (req, res) => {
   }
 });
 
-router.get('/device/:deviceId', async (req, res) => {
+router.get('/device/detail/:deviceId', async (req, res) => {
   try {
-    const device = await Device.findOne({
+    const device = await Device.findById({
       _id: req.params.deviceId
     });
     if (device) {
@@ -43,11 +43,12 @@ router.get('/device/:deviceId', async (req, res) => {
         status: 200,
         data: device
       });
+    } else {
+      res.status(404).json({
+        status: 404,
+        message: 'Device not found'
+      });
     }
-    res.status(400).json({
-      status: 400,
-      message: 'No post found'
-    });
   } catch (err) {
     res.status(400).json({
       status: 400,
@@ -66,11 +67,12 @@ router.put('/device/edit/:deviceId', async (req, res) => {
         status: 200,
         data: device
       });
+    } else {
+      res.status(400).json({
+        status: 400,
+        message: 'Device not found'
+      });
     }
-    res.status(400).json({
-      status: 400,
-      message: 'No post found'
-    });
   } catch (err) {
     res.status(400).json({
       status: 400,
@@ -85,12 +87,12 @@ router.delete('/device/delete/:deviceId', async (req, res) => {
     if (device) {
       res.status(200).json({
         status: 200,
-        message: 'Post deleted successfully'
+        message: 'Device deleted successfully'
       });
     } else {
       res.status(400).json({
         status: 400,
-        message: 'No post found'
+        message: 'No device found'
       });
     }
   } catch (err) {
